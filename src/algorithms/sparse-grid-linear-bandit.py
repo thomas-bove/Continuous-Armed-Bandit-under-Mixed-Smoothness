@@ -2,9 +2,9 @@ import numpy as np
 import itertools
 import math
 
-# ============================================================
+    
 # 1. Synthetic Linear Bandit Environment
-# ============================================================
+    
 
 class LinearBanditEnv:
     """
@@ -26,17 +26,9 @@ class LinearBanditEnv:
         return self.theta @ x + np.random.normal(0, self.noise_std)
 
 
-# ============================================================
 # 2. Sparse Grid (Simplified Smolyak-like construction)
-# ============================================================
 
 def one_dimensional_nodes(level):
-    """
-    Nested 1D nodes.
-    Level 1: {0.5}
-    Level 2: {0, 1}
-    Level >=3: equispaced points with increasing resolution.
-    """
     if level == 1:
         return np.array([0.5])
     else:
@@ -45,10 +37,6 @@ def one_dimensional_nodes(level):
 
 
 def smolyak_grid(d, max_level):
-    """
-    Construct sparse grid index set:
-    sum(level_i) <= max_level + d - 1
-    """
     nodes = set()
 
     # All multi-indices
@@ -61,9 +49,9 @@ def smolyak_grid(d, max_level):
     return np.array(list(nodes))
 
 
-# ============================================================
+ 
 # 3. UCB1 for discrete arms
-# ============================================================
+    
 
 class UCB1:
     def __init__(self, arms):
@@ -93,9 +81,9 @@ class UCB1:
         self.values[arm_index] = value + (reward - value) / n
 
 
-# ============================================================
+    
 # 4. Main experiment
-# ============================================================
+    
 
 def run_experiment(d=3, T=5000, max_level=3):
     env = LinearBanditEnv(d)
@@ -127,9 +115,9 @@ def run_experiment(d=3, T=5000, max_level=3):
     return regrets
 
 
-# ============================================================
+    
 # 5. Run example
-# ============================================================
+    
 
 if __name__ == "__main__":
     d = 5
