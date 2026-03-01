@@ -91,7 +91,7 @@ python experiments/run_experiment.py
 
 `d=5`, `T=20000`, Smolyak level 3 (N=61 arms), linear reward `f(x) = θᵀx`.
 
-![Exp 1](results/plots/exp1_exponent.png)
+![Exp 1](experiments/results/plots/exp1_exponent.png)
 
 Estimated exponent: **0.811** (log-log fit after warmup).
 
@@ -103,7 +103,7 @@ Estimated exponent: **0.811** (log-log fit after warmup).
 
 `d=5`, `T=5000`, Smolyak level 2 (N=11) vs. level 3 (N=61).
 
-![Exp 2](results/plots/exp2_levels.png)
+![Exp 2](experiments/results/plots/exp2_levels.png)
 
 **Linear reward:** both levels give near-identical regret — the linear function is well-approximated even by the coarse grid.
 
@@ -115,7 +115,7 @@ Estimated exponent: **0.811** (log-log fit after warmup).
 
 `d=5`, `T=10000`, `N` scaled as `T^{1/3}`.
 
-![Exp 3](results/plots/exp3_dms.png)
+![Exp 3](experiments/results/plots/exp3_dms.png)
 
 Estimated exponent: **0.372**. The regret curve visibly flattens after `t ≈ 6000`, confirming sublinear growth and validating the `Õ(T^{2/3})` bound in the nonlinear DMS setting.
 
