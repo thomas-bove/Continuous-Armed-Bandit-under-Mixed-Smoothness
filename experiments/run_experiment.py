@@ -8,7 +8,6 @@ from src.ucb1 import UCB1
 from experiments.environment import LinearBanditEnv, DMSBanditEnv
 
 def find_max_level(d, target_N):
-    """Trova il max_level tale che la griglia abbia circa target_N punti."""
     for level in range(1, 8):
         grid = smolyak_grid(d, level)
         if len(grid) >= target_N:
@@ -16,11 +15,7 @@ def find_max_level(d, target_N):
     return 7, len(smolyak_grid(d, 7))
 
 def run_experiment(d=5, T=5000, mode="fixed", env_type="linear", max_level=3):
-    """
-    mode='fixed'  → griglia fissa con max_level (come prima)
-    mode='scaled' → N = round(T^(1/3)), max_level scelto di conseguenza
-    env_type='linear' o 'dms'
-    """
+
     if env_type == "linear":
         env = LinearBanditEnv(d)
     else:
@@ -72,7 +67,6 @@ if __name__ == "__main__":
     plt.savefig("results/plots/exp1_exponent.png", dpi=150, bbox_inches='tight')
 
     # ── Esperimento 2: N scalato con T vs N fisso ─────────────────────────
-    # Sostituisci Esperimento 2 con questo
 
     print("Esperimento 2: confronto level=2 vs level=3")
     fig, axes = plt.subplots(1, 2, figsize=(12, 4))
@@ -94,8 +88,8 @@ if __name__ == "__main__":
 
     # ── Esperimento 3: funzione DMS non lineare ───────────────────────────
     print("Esperimento 3: funzione DMS non lineare")
-    regrets_dms = run_experiment(d=d, T=2000, mode="scaled", env_type="dms")
-    log_T2 = np.log(np.arange(1, 2001))
+    regrets_dms = run_experiment(d=d, T=10000, mode="scaled", env_type="dms")
+    log_T2 = np.log(np.arange(1, 10001))
     log_R2 = np.log(np.maximum(np.array(regrets_dms), 1e-10))
     alpha2, _ = np.polyfit(log_T2[100:], log_R2[100:], 1)
     print(f"  Esponente stimato (DMS): {alpha2:.3f}")
@@ -107,4 +101,4 @@ if __name__ == "__main__":
     plt.savefig("results/plots/exp3_dms.png", dpi=150, bbox_inches='tight')
 
     plt.show()
-    print("Fatto. Grafici salvati in results/plots/")
+    print("Grafici salvati in results/plots/")
